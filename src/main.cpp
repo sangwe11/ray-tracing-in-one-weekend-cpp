@@ -77,8 +77,7 @@ int main()
     scene.add(std::make_shared<sphere>(point3(1.0, 0, -1), 0.5, material_right));
 
     // Camera
-    auto focal_length = 1.0;
-    camera cam(point3(0, 0, 0), aspect_ratio, focal_length);
+    camera cam(point3(-2, 2, 1), vec3(1, -1, -1), vec3(0, 1,0), 90, aspect_ratio);
 
     // Render
     output_file << "P3\n" << image_width << ' ' << image_height << "\n255\n";
