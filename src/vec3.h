@@ -141,6 +141,13 @@ public:
 		return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
 	}
 
+	bool near_zero() const
+	{
+		const auto s = 1e-8;
+
+		return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
+	}
+
 public:
 	double e[3];
 };
@@ -170,6 +177,19 @@ vec3 random_in_unit_sphere()
 
 		return p;
 	}
+}
+
+vec3 reflect(const vec3& v, const vec3& normal)
+{
+	return v - 2 * v.dot(normal) * normal;
+}
+
+vec3 refract(const vec3& uv, const vec3& normal, double etai_over_etat)
+{
+	double cos_theta = fmin(dot(-uv, normal), 1.0);
+	vec3 r_out_perp = etai_over_etat * (uv + cos_theta * normal);
+	vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * normal;
+	return r_out_perp + r_out_parallel;
 }
 
 // Type aliases

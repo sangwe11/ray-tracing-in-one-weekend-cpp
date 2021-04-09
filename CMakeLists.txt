@@ -11,6 +11,7 @@ set (SRC_FILES
 	src/common.h
 	src/hittable.h
 	src/hittable_list.h
+	src/material.h
 	src/ray.h
 	src/sphere.h
 	src/vec3.h
